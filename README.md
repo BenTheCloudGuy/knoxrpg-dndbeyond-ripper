@@ -4,17 +4,25 @@ An automated tool for logging into D&D Beyond and extracting content using Selen
 
 ## Setup
 
-1. Install dependencies:
+1. Setup Environment
 
    ```bash
-   pip install -r requirements.txt
+   ## Activate Virtual Environment for Python
+   . .venv/bin/activate
+
+   ## Install Python Requirements
+   pip install -r scripts/requirements.txt
    ```
 
-2. Run the authentication script:
+2. Packages and Version Info
 
-   ```bash
-   python dndbeyond_auth.py
-   ```
+   | Package           | Current Version | Release Date |
+   | ----------------- | --------------- | ------------ |
+   | Selenium          | 4.34.2          | 07/08/2025   |
+   | webdriver-manager | 4.0.2           | 07/25/2025   |
+   | requests          | 2.32.4          | 06/09/2025   |
+   | playwright        | 1.54.0          | 07/22/2025   |
+   | beautifulsoup4    | 4.13.4          | 04/15/2025   |
 
 ## Usage
 
@@ -34,7 +42,7 @@ if success:
     # Continue with your automation...
     driver = auth.get_driver()
     # Your code here...
-    
+
 auth.close()  # Always close when done
 ```
 
