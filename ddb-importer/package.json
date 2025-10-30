@@ -1,0 +1,26 @@
+{
+  "name": "ddb-importer",
+  "version": "6.6.5",
+  "author": "MrPrimate",
+  "description": "Foundry VTT module for integrating D&D Beyond content.",
+  "private": true,
+  "scripts": {
+    "lint": "npx eslint src/",
+    "lint-fix": "npx eslint src/ --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run clear; webpack",
+    "clear": "rm -rf dist/*"
+  },
+  "devDependencies": {
+    "node-fetch": "^3.2.10",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "3.1.0",
+    "prettier-eslint": "^16.3.0",
+    "terser": "^5.10.0",
+    "terser-webpack-plugin": "^5.3.0",
+    "webpack": "^5.76.0",
+    "webpack-cli": "^4.7.2",
+    "eslint-plugin-jsdoc": "^46.5.0"
+  }
+}

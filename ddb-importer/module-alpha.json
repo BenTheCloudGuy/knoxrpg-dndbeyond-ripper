@@ -1,0 +1,63 @@
+{
+  "id": "ddb-importer",
+  "title": "[ALPHA] DDB-Importer: A D&D Beyond Integrator",
+  "license": "MIT License",
+  "description": "ALPHA DDB-Importer",
+  "version": "6.0.0",
+  "download": "https://ALPHA_SITE/ALPHA_PATH/ddb-importer.zip",
+  "manifest": "https://ALPHA_SITE/ALPHA_PATH/module.json",
+  "url": "https://github.com/mrprimate/ddb-importer",
+  "readme": "https://github.com/MrPrimate/ddb-importer/blob/main/README.md",
+  "changelog": "https://github.com/MrPrimate/ddb-importer/blob/main/CHANGELOG.md",
+  "compatibility": {
+    "minimum": "13.346",
+    "verified": "13.346",
+    "maximum": 13
+  },
+  "authors": [
+    {
+      "name": "MrPrimate",
+      "email": "jack@mrprimate.co.uk",
+      "url": "https://mrprimate.co.uk",
+      "patreon": "https://www.patreon.com/MrPrimate",
+      "discord": "https://discord.gg/WzPuRuDJVP"
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "5.1.0",
+          "verified": "5.1.0"
+        }
+      }
+    ],
+    "requires": [
+    ],
+    "recommends": [
+    ]
+  },
+  "scripts": [
+    "./vendor/zipjs/zip-fs.js"
+  ],
+  "esmodules": ["dist/main.mjs"],
+  "styles": [
+    "./css/default.css",
+    "./css/import.css",
+    "./css/journal.css",
+    "./css/notifications.css",
+    "./css/adventure.css"
+  ],
+  "packs": [],
+  "socket": true,
+  "persistentStorage": true
+}
