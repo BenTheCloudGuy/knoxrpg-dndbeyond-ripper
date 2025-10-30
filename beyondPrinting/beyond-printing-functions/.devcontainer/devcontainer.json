@@ -1,0 +1,87 @@
+{
+  "name": "Beyond Printing Functions",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/beyond-printing-functions",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-node-azure-pack",
+        "ms-azuretools.vscode-azurefunctions",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-vscode.azure-account",
+        "ms-azuretools.vscode-azureresourcegroups",
+        "ms-azuretools.vscode-azurestorage",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense",
+        "streetsidesoftware.code-spell-checker",
+        "ms-vscode.test-adapter-converter",
+        "hbenl.vscode-test-explorer",
+        "ms-playwright.playwright",
+        "humao.rest-client"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/bin/zsh"
+          }
+        },
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "files.watcherExclude": {
+          "**/node_modules/**": true,
+          "**/.git/objects/**": true,
+          "**/.git/subtree-cache/**": true
+        },
+        "search.exclude": {
+          "**/node_modules": true,
+          "**/bower_components": true,
+          "**/*.code-search": true
+        },
+        "azureFunctions.showProjectWarning": false,
+        "azureFunctions.projectRuntime": "~4",
+        "azureFunctions.projectLanguage": "JavaScript",
+        "azureFunctions.templateFilter": "Verified"
+      }
+    }
+  },
+
+  "forwardPorts": [7071, 8080, 3000, 10000, 10001, 10002, 6379],
+  "portsAttributes": {
+    "7071": {
+      "label": "Azure Functions"
+    },
+    "8080": {
+      "label": "Development Server"
+    },
+    "3000": {
+      "label": "Additional Dev Port"
+    },
+    "10000": {
+      "label": "Azurite Blob"
+    },
+    "10001": {
+      "label": "Azurite Queue"
+    },
+    "10002": {
+      "label": "Azurite Table"
+    },
+    "6379": {
+      "label": "Redis"
+    }
+  },
+
+  "postCreateCommand": ".devcontainer/post-create.sh",
+  "postStartCommand": ".devcontainer/post-start.sh",
+
+  "remoteUser": "vscode"
+}

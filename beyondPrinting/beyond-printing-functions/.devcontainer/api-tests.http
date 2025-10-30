@@ -1,0 +1,51 @@
+# Beyond Printing Functions - Local Development
+
+### Test Process Sourcebook
+POST http://localhost:7071/api/processSourcebook
+Content-Type: application/json
+
+{
+  "url": "https://www.dndbeyond.com/sources/phb",
+  "authToken": "{\"cookies\":[{\"name\":\"CobaltSession\",\"value\":\"your-session-token\",\"domain\":\".dndbeyond.com\"}]}",
+  "options": {
+    "includeCover": true,
+    "includeBacklinks": true,
+    "includeTitle": true,
+    "headingOnNewPage": true
+  }
+}
+
+###
+
+### Test Process Bulk
+POST http://localhost:7071/api/processBulk
+Content-Type: application/json
+
+{
+  "urls": [
+    "https://www.dndbeyond.com/sources/phb",
+    "https://www.dndbeyond.com/sources/dmg"
+  ],
+  "authToken": "{\"cookies\":[{\"name\":\"CobaltSession\",\"value\":\"your-session-token\",\"domain\":\".dndbeyond.com\"}]}",
+  "options": {
+    "includeCover": true,
+    "includeBacklinks": false
+  }
+}
+
+###
+
+### Check Status
+GET http://localhost:7071/api/checkStatus/{{requestId}}
+
+###
+
+### Health Check
+GET http://localhost:7071/api/health
+
+###
+
+### List Blobs (Development)
+GET http://localhost:7071/api/listBlobs
+
+###
