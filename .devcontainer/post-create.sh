@@ -61,3 +61,9 @@ fi
 echo "Installing Playwright and its dependencies..."   
 playwright install
 playwright install-deps
+
+# Install Node.js v8 for local testing
+echo "Installing Node.js v8 for local testing..."
+curl -fsSL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+echo "Node.js version installed: $(node -v)"
