@@ -1,6 +1,7 @@
 // main.bicep
 // Deploys Storage Account, Key Vault, and Function App with System-Managed Identity
 
+
 @description('Location for all resources')
 param location string = resourceGroup().location
 
