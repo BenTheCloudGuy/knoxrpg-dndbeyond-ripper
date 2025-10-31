@@ -43,8 +43,20 @@ if [ ! -d ".venv" ]; then
     pip install -r /scripts/requirements.txt
 fi
 
+
+# Install Azure CLI
+echo "Installing Azure CLI..."
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+# Azure CLI Login using environment variables
+if [ -n "$AZURE_CLIENT_ID" ] && [ -n "$AZURE_CLIENT_SECRET" ] && [ -n "$AZURE_TENANT_ID" ]; then
+    echo "Logging into Azure CLI using service principal..."
+    az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
+else
+    echo "Azure login environment variables not set. Skipping Azure CLI login."
+fi
+
 # Install Playwright and its dependencies
 echo "Installing Playwright and its dependencies..."   
 playwright install
 playwright install-deps
-
