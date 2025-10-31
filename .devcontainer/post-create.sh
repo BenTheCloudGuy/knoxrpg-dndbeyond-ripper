@@ -52,6 +52,7 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 if [ -n "$AZURE_CLIENT_ID" ] && [ -n "$AZURE_CLIENT_SECRET" ] && [ -n "$AZURE_TENANT_ID" ]; then
     echo "Logging into Azure CLI using service principal..."
     az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
+    az account set --subscription $MISC_LABS_SUBSCRIPTION_ID
 else
     echo "Azure login environment variables not set. Skipping Azure CLI login."
 fi
