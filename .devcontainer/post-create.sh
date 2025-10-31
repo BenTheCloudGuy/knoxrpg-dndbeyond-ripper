@@ -1,6 +1,4 @@
-#!/bin/bash
-
-
+#!/bin/bashno
 echo "Setting up D&D Beyond Ripper Development Environment..."
 
 # Set cobalt_token from Codespace secret COBALTTOKEN if available
@@ -62,8 +60,8 @@ echo "Installing Playwright and its dependencies..."
 playwright install
 playwright install-deps
 
-# Install Node.js v8 for local testing
-echo "Installing Node.js v8 for local testing..."
-curl -fsSL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+# Install Node.js v20 for local testing
+echo "Installing Node.js v20 for local testing..."
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt-get install -y nodejs
 echo "Node.js version installed: $(node -v)"
