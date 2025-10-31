@@ -1,6 +1,17 @@
 #!/bin/bash
 
+
 echo "Setting up D&D Beyond Ripper Development Environment..."
+
+# Set cobalt_token from Codespace secret COBALTTOKEN if available
+if [ -n "$COBALTTOKEN" ]; then
+    echo "Exporting cobalt_token from Codespace secret..."
+    echo "export cobalt_token=\"$COBALTTOKEN\"" >> "$HOME/.bashrc"
+    echo "export cobalt_token=\"$COBALTTOKEN\"" >> "$HOME/.zshrc"
+    export cobalt_token="$COBALTTOKEN"
+else
+    echo "COBALTTOKEN secret not found. Skipping cobalt_token export."
+fi
 
 # Update system packages
 sudo apt-get update
@@ -23,7 +34,6 @@ wget -O /tmp/geckodriver.tar.gz "https://github.com/mozilla/geckodriver/releases
 sudo tar -xzf /tmp/geckodriver.tar.gz -C /usr/local/bin/
 sudo chmod +x /usr/local/bin/geckodriver
 
-
 # Create virtual environment if it doesn't exist
 if [ ! -d ".venv" ]; then
     echo "Creating virtual environment..."
@@ -37,3 +47,4 @@ fi
 echo "Installing Playwright and its dependencies..."   
 playwright install
 playwright install-deps
+
