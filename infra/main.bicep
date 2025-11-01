@@ -1,6 +1,5 @@
 // main.bicep
-// Deploys Storage Account, Key Vault, and Function App with System-Managed Identity
-
+// Deploys Storage Account, Key Vault, and Function Apps with System-Managed Identity
 
 @description('Location for all resources')
 param location string = resourceGroup().location
@@ -14,66 +13,42 @@ param keyVaultName string
 @description('Name for the Function App')
 param functionAppName string
 
-// Storage Account
-resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
-  name: storageAccountName
-  location: location
-  sku: {
-    name: 'Standard_LRS'
-  }
-  kind: 'StorageV2'
-  properties: {}
-}
-
-// Key Vault
-resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
-  name: keyVaultName
-  location: location
-  properties: {
-    sku: {
-      family: 'A'
-      name: 'standard'
-    }
-    tenantId: subscription().tenantId
-    accessPolicies: []
-    enableSoftDelete: true
-    enablePurgeProtection: true
+// Deploy Storage Account with containers and Event Grid
+module storage 'modules/storage.bicep' = {
+  name: 'storage-deployment'
+  params: {
+    name: storageAccountName
+    location: location
   }
 }
 
-// App Service Plan (required for Function App)
-resource appServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
-  name: '${functionAppName}-plan'
-  location: location
-  sku: {
-    name: 'Y1'
-    tier: 'Dynamic'
+// Deploy Key Vault with secrets
+module keyVault 'modules/keyvault.bicep' = {
+  name: 'keyvault-deployment'
+  params: {
+    name: keyVaultName
+    location: location
   }
-  kind: 'functionapp'
 }
 
-// Function App
-resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
-  name: functionAppName
-  location: location
-  kind: 'functionapp'
-  identity: {
-    type: 'SystemAssigned'
-  }
-  properties: {
-    serverFarmId: appServicePlan.id
-    siteConfig: {
-      appSettings: [
-        {
-          name: 'AzureWebJobsStorage'
-          value: storageAccount.properties.primaryEndpoints.blob
-        }
-      ]
-    }
+// Deploy Function Apps
+module functionApps 'modules/functionapp.bicep' = {
+  name: 'functionapp-deployment'
+  params: {
+    location: location
+    functionAppName: functionAppName
+    storageAccountName: storageAccountName
+    keyVaultName: keyVaultName
   }
   dependsOn: [
-    storageAccount
+    storage
     keyVault
-    appServicePlan
   ]
 }
+
+output storageAccountId string = storage.outputs.storageAccountId
+output keyVaultId string = keyVault.outputs.keyVaultId
+output authFetchFunctionAppId string = functionApps.outputs.authFetchFunctionAppId
+output pdfFetchFunctionAppId string = functionApps.outputs.pdfFetchFunctionAppId
+output imgExtractFunctionAppId string = functionApps.outputs.imgExtractFunctionAppId
+output txtExtractFunctionAppId string = functionApps.outputs.txtExtractFunctionAppId
